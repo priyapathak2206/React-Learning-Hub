@@ -1,16 +1,30 @@
-# React + Vite
+# React Task Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Practical 8: Performance Optimization and Lazy Loading
 
-Currently, two official plugins are available:
+This practical focuses on improving the performance of the React Task Management application using route-based lazy loading and code splitting.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technologies Used
 
-## React Compiler
+- React
+- React Router
+- Vite
+- JavaScript
+- CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Lazy Loading Implementation
 
-## Expanding the ESLint configuration
+React.lazy() and Suspense are used to load pages and components only when they are required.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Lazy-loaded Routes
+
+The following routes are loaded lazily:
+
+- Projects
+- Contact
+
+Example:
+
+```jsx
+const Projects = lazy(() => import("./pages/projects"));
+const Contact = lazy(() => import("./pages/Contact"));

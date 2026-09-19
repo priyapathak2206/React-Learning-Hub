@@ -1,10 +1,12 @@
+import React, { lazy, Suspense } from "react";
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Projects from "./pages/projects";
+
+const Projects = lazy(() => import("./pages/projects"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
@@ -19,12 +21,14 @@ function App() {
         <Link to="/contact">Contact</Link>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <Suspense fallback={<div className="card"><h3>Loading page...</h3></div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Suspense>
 
     </div>
   );

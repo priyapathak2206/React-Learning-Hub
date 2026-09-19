@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
+
 import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
 import {
@@ -8,6 +9,7 @@ import {
   deleteTask,
 } from "../api";
 
+const TaskStatistics = lazy(() => import("../components/TaskStatistics"));
 function Projects() {
   // Task list
   const [tasks, setTasks] = useState([]);
@@ -370,7 +372,9 @@ function Projects() {
       {/* ------------------------------------------------
           TASK LIST
       ------------------------------------------------ */}
-
+      <Suspense fallback={<div className="card">Loading statistics...</div>}>
+        <TaskStatistics tasks={tasks} />
+      </Suspense>
       <h2>Tasks</h2>
 
       {tasks.length === 0 ? (
